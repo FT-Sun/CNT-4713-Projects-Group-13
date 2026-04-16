@@ -40,6 +40,29 @@ def send_connect_command(server_host, control_port):
 
     return control_socket, data_socket
 
+def rsa_encrypt(message_bytes, public_key):
+    # Encrypt the data using the Public Key
+    ciphertext = public_key.encrypt(
+        message_bytes,
+        padding.OAEP(
+            mgf=padding.MGF1(algorithm=hashes.SHA256()),
+            algorithm=hashes.SHA256(),
+            label=None
+        )
+    )
+    return ciphertext
+    
+def rsa_decrypt(ciphertext, private_key):
+    # Decrypt the data using the Private Key
+    plaintext = private_key.decrypt(
+        ciphertext,
+        padding.OAEP(
+            mgf=padding.MGF1(algorithm=hashes.SHA256()),
+            algorithm=hashes.SHA256(),
+            label=None
+        )
+    )
+    return plaintext
 
 def establish_tunnel(control_socket, data_socket, client_public_key):
     print("Requesting tunnel")
@@ -90,7 +113,6 @@ def verify_server_response(data_socket, message, client_private_key):
         print("Secure")
     else:
         print("Compromised")
-
 
 def main():
     if len(sys.argv) != 3:
