@@ -1,7 +1,6 @@
 import socket
 import sys
 
-
 from rsa_utils import (
     generate_rsa_keypair,
     export_public_key,
@@ -19,7 +18,6 @@ def start_client():
     public_key, private_key = generate_rsa_keypair()
     print("RSA keypair created")
     return public_key, private_key
-
 
 
 def send_connect_command(server_host, control_port):
