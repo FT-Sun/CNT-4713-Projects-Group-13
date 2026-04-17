@@ -212,7 +212,7 @@ def main_server():
 
     control_port = int(sys.argv[2])
 
-    print("Starting server ...")
+    print("Starting server...")
     print("Creating RSA keypair")
     server_public, server_private = generate_rsa_keypair()
     print("RSA keypair created")
@@ -223,7 +223,7 @@ def main_server():
     control_socket.bind(("", control_port))
     control_socket.listen(5)
 
-    print("Awaiting connections ...")
+    print("Awaiting connections...")
 
     while True:
         conn, addr = control_socket.accept()
